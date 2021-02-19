@@ -56,10 +56,29 @@ function setvolume(){
   vid.volume = volumeslider.value / 100;
 }
 
+
+ async function login() {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({ "username": "kareemdb5", "password": "1234" });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            let response = await fetch("https://nameless-dusk-81295.herokuapp.com/http://anyservice.imassoft.com/5/login", requestOptions);
+            let responseJsonObj = await response.json()
+             console.log(responseJsonObj.token)
+             return responseJsonObj.token
+        }
+
 async function getVideo() {
+    let dynamic_token =await login()
+  console.log("token inside in get movies",dynamic_token) 
 var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
-myHeaders.append("token", "27be4a72-6d58-44df-94e3-7fe46bcf4cbb");
+myHeaders.append("token", dynamic_token );
 
 let requestOptions = {
   method: 'GET',

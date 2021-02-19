@@ -55,11 +55,31 @@ function vidmute(){
 function setvolume(){
   vid.volume = volumeslider.value / 100;
 }
+ async function login() {
+            var myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+            var raw = JSON.stringify({ "username": "kareemdb5", "password": "1234" });
+            var requestOptions = {
+                method: 'POST',
+                headers: myHeaders,
+                body: raw,
+                redirect: 'follow'
+            };
+            let response = await fetch("https://nameless-dusk-81295.herokuapp.com/http://anyservice.imassoft.com/5/login", requestOptions);
+            let responseJsonObj = await response.json()
+             console.log(responseJsonObj.token)
+             return responseJsonObj.token
+        }
+
 
 async function getmovies() {
+
+  let dynamic_token =await login()
+  console.log("token inside in get movies",dynamic_token) 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append("token", "27be4a72-6d58-44df-94e3-7fe46bcf4cbb");
+    myHeaders.append("token",dynamic_token );
+
 
     var requestOptions = {
         method: 'GET',
@@ -71,26 +91,33 @@ async function getmovies() {
     let urlArray = []
 
     for(let moivesId=0 ; moivesId<moivesCount ; moivesId++) {
-        
-        let httpResponse = await fetch(`https://nameless-dusk-81295.herokuapp.com/http://anyservice.imassoft.com/5/img/${moivesId}`,requestOptions);
+        let url=`https://nameless-dusk-81295.herokuapp.com/http://anyservice.imassoft.com/5/videos-with-imgs/${moivesId}`
+        let httpResponse = await fetch(url,requestOptions);
         
 
         responseJsonObj = await httpResponse.json();  
         console.log(responseJsonObj) 
   
-        urlArray.push(responseJsonObj.data.url)
-        window.localStorage.setItem("moives-url-array", urlArray)   
+        urlArray.push(responseJsonObj.data.img_url)
+        window.localStorage.setItem("moives-url-array", urlArray) 
+window.localStorage.setItem("video_url",responseJsonObj.data.url )
     }
 }
+
+ 
+
 
 getmovies();
 
 let localStorageUrlArray = window.localStorage.getItem("moives-url-array")
+let localStorageUrl = window.localStorage.getItem("video_url")
 
 localStorageUrlArray = localStorageUrlArray.split(",")
 console.log(localStorageUrlArray[0])
 console.log(localStorageUrlArray[1])
 console.log(localStorageUrlArray[2])
+
+document.getElementById("my_video").setAttribute("src",localStorageUrl)
 
 document.getElementById("movie_1").setAttribute("src", localStorageUrlArray[0])
 document.getElementById("movie_2").setAttribute("src", localStorageUrlArray[1])
