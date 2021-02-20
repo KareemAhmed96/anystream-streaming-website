@@ -3,14 +3,37 @@
     <head>
         <meta charset="utf-8"> 
         <title>User Login</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="./css/user-login-styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
     </head>
 
     <body>
-        <h1>Welcome To Login Page</h1>
-        <label>Your Name</label><input type="txt" placeholder="Please Enter Your Name :" id="user">
-        <label>Confidential Password</label><input type="password" placeholder=" Please Enter Your Password :" id="pass">
-        <button onclick="login()">Login</button>
-        <button onclick="logout()">Logout</button>
+        <!-- Header Includes Logo and Slogan -->
+        <div class="jumbotron text-center header">
+            <h1 id="websiteName">Any Stream  </h1>
+            <p  id="slogan">Find Everything Here With one of The top 10 Streaming Websites </p> 
+        </div>
+
+          <!-- Body Includes Login Button and register link -->
+          <div class="container">
+          <div class="form">
+                <input type="text" placeholder="username" id="name" />
+                <input type="password" placeholder="password" id="pass" />
+                <button onclick="authenticate();">login</button>
+                <p class="message">Not registered? >> <a href="user-register.html">Create</a> an account</a></p>
+            </div>
+            <h3 id="msg" style="color:aqua"></h3>
+            </div>
+         <!-- Footer Includes Terms ,Contacts and About  -->
+        <div class="footer">
+            <span>Contact Us </span>
+            <span>Terms </span>
+            <span>About Us</span>
+        </div>
+
         <script src="js/user-login-script.js"></script>
     </body>
 
