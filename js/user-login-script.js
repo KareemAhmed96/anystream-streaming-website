@@ -23,10 +23,15 @@ async function login() {
       console.log(responseJsonObj)
       // Check the Response 
       if (responseJsonObj.token){
-        
+
         // Successful Login >> Store Token In Locale Storage
         console.log(responseJsonObj.token)
         window.localStorage.setItem("Token",responseJsonObj.token)
+        // Simulate a mouse click:
+        window.location.href = "home.html";
+
+        // Simulate an HTTP redirect:
+        // window.location.replace("home.html");
       }
       else{
         /// Not Authorized User Alert will Be Raised 
