@@ -110,6 +110,7 @@ function reply_click() {
     return event.target.id
 }
 
+
 /* jQuery Function -> $(staticAncestors).on(eventName, dynamicChild, function() {}); */
 
 $('#cards_container').on('click', '.card', function(){
